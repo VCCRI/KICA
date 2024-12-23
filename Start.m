@@ -110,13 +110,11 @@ function analyse_csv_file(fileFullName)
   % Watch out - Sampling and Stimulation initialization order
   Sampling.Init(mean(diff(table2array(tableData(:, 1)))));
 
-  % SignalType:
+  % 1. SignalType:
   pulseDetection_signalType = SignalType.Calcium; % <--- PARAMETER
   %pulseDetection_signalType = SignalType.Voltage; % <--- PARAMETER
                                 
-  %% initialize Stimulation
-
-  % define Stimulation parameters
+  % 2. Stimulation parameters
   %stimuliPeriod_ms = 1000;            % <--- PARAMETER
   %stimuliNumber = 10;                 % <--- PARAMETER
   %stimulationStart_ms = 5000;         % <--- PARAMETER
@@ -139,8 +137,7 @@ function analyse_csv_file(fileFullName)
   %stimulationStart_ms = 10000;         % <--- PARAMETER
   %stimulusPulseDuration_ms = 7.50; 
 
-  %% PulseDetection Parameters
-
+  % 3. PulseDetection Parameters
   % threshold to detect pulses
   pulseDetection_thresholdPercentage = 20;             % <--- PARAMETER
   % part of signal at start to ignore
@@ -156,8 +153,7 @@ function analyse_csv_file(fileFullName)
   pulseDetection_denoise_waveletNumber = 6.8;
   pulseDetection_denoise_waveletThresholdRule = "Hard";
 
-  %% PulseAnalysis Parameters
-
+  % 4. PulseAnalysis Parameters
   % specify APDs to be calculated
   pulseAnalysis_apDurations = [30 50 75 90 95];                % <--- PARAMETER
   pulseAnalysis_apdIsEndPointApproximatedSymbol = "*";
@@ -167,12 +163,12 @@ function analyse_csv_file(fileFullName)
                                       %PulseStartPointType.UpstrokeStart
                                       %PulseStartPointType.UpstrokeEnd
                                       
-  %% Visualization Parameters
+  % 5. Visualization Parameters
 
   visualize_showVisualizedCells = false;      % <--- PARAMETER
   visualize_saveVisualizedCellsToFiles = true;% <--- PARAMETER
 
-  %% Quality Control Parameters
+  % 6. Quality Control Parameters
 
   qc_isQC_Required = true;                    % <--- PARAMETER
   qc_SNR_Threshold = 10;                      % <--- PARAMETER
