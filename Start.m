@@ -110,13 +110,17 @@ function analyse_csv_file(fileFullName)
   % Watch out - Sampling and Stimulation initialization order
   Sampling.Init(mean(diff(table2array(tableData(:, 1)))));
 
+  % SignalType:
+  pulseDetection_signalType = SignalType.Calcium; % <--- PARAMETER
+  %pulseDetection_signalType = SignalType.Voltage; % <--- PARAMETER
+                                
   %% initialize Stimulation
 
   % define Stimulation parameters
-  stimuliPeriod_ms = 1000;            % <--- PARAMETER
-  stimuliNumber = 10;                 % <--- PARAMETER
-  stimulationStart_ms = 5000;         % <--- PARAMETER
-  stimulusPulseDuration_ms = 7.5; 
+  %stimuliPeriod_ms = 1000;            % <--- PARAMETER
+  %stimuliNumber = 10;                 % <--- PARAMETER
+  %stimulationStart_ms = 5000;         % <--- PARAMETER
+  %stimulusPulseDuration_ms = 7.5; 
   
   % voltage example
   %stimuliPeriod_ms = 1000;            % <--- PARAMETER
@@ -125,10 +129,10 @@ function analyse_csv_file(fileFullName)
   %stimulusPulseDuration_ms = 7.5; 
 
   % calcium example
-  %stimuliPeriod_ms = 1670;            % <--- PARAMETER
-  %stimuliNumber = 9;                 % <--- PARAMETER
-  %stimulationStart_ms = 5000;         % <--- PARAMETER
-  %stimulusPulseDuration_ms = 7.5; 
+  stimuliPeriod_ms = 1670;            % <--- PARAMETER
+  stimuliNumber = 9;                 % <--- PARAMETER
+  stimulationStart_ms = 5000;         % <--- PARAMETER
+  stimulusPulseDuration_ms = 7.5; 
   
   %stimuliPeriod_ms = 1000;            % <--- PARAMETER
   %stimuliNumber = 10;                 % <--- PARAMETER
@@ -142,10 +146,6 @@ function analyse_csv_file(fileFullName)
   % part of signal at start to ignore
   pulseDetection_numberOfSecondsAtStartToIgnore = 0;  % <--- PARAMETER
 
-  % SignalType:
-  %pulseDetection_signalType = SignalType.Calcium; % <--- PARAMETER
-  pulseDetection_signalType = SignalType.Voltage; % <--- PARAMETER
-                                
 
   % specify params for false pulses removal
   pulseDetection_removeFalsePulses_PeakThresholdPercentage = 25;       
