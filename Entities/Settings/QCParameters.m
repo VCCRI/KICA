@@ -15,9 +15,9 @@ classdef QCParameters < handle
         WriteFiguresToQCReportFile = false;
         SNR_Threshold = 5;
         CheckForSNR = false;
-        CheckForPulsesMissingStimuli = false;
-        CheckForPulsesSpanMoreThanOneStimilus = false;
         CheckForNoPulsesDetected = false;
+        CheckForPulsesMissingStimuli = false;
+        CheckForPulsesSpanMoreThanOneStimulus = false;
         
     end
     
@@ -26,7 +26,7 @@ classdef QCParameters < handle
         function obj = QCParameters(isQC_Required, SNR_Threshold, writeFiguresToQCReportFile,... 
                                 checkForSNR, qc_checkForNoPulsesDetected,... 
                                 checkForPulsesMissingStimuli,... 
-                                checkForPulsesSpanMoreThanOneStimilus)
+                                checkForPulsesSpanMoreThanOneStimulus)
                               
             if (nargin == 0)
                 obj.IsQCRequired = false;
@@ -34,7 +34,7 @@ classdef QCParameters < handle
                 obj.WriteFiguresToQCReportFile = false;
                 obj.CheckForSNR = false;
                 obj.CheckForPulsesMissingStimuli = false;
-                obj.CheckForPulsesSpanMoreThanOneStimilus = false;
+                obj.CheckForPulsesSpanMoreThanOneStimulus = false;
                 obj.CheckForNoPulsesDetected = false;
             elseif (nargin == 7)
                 obj.IsQCRequired = isQC_Required;
@@ -42,7 +42,7 @@ classdef QCParameters < handle
                 obj.WriteFiguresToQCReportFile = writeFiguresToQCReportFile;
                 obj.CheckForSNR = checkForSNR;
                 obj.CheckForPulsesMissingStimuli = checkForPulsesMissingStimuli;
-                obj.CheckForPulsesSpanMoreThanOneStimilus = checkForPulsesSpanMoreThanOneStimilus;
+                obj.CheckForPulsesSpanMoreThanOneStimulus = checkForPulsesSpanMoreThanOneStimulus;
                 obj.CheckForNoPulsesDetected = qc_checkForNoPulsesDetected;
             else
                 error('Wrong number of input arguments')

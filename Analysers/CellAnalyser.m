@@ -399,7 +399,7 @@ classdef CellAnalyser < handle
             self.Cell.QCStatus = bitor(self.Cell.QCStatus, self.CheckForSNR());
             self.Cell.QCStatus = bitor(self.Cell.QCStatus, self.CheckForNoPulsesDetected());
             self.Cell.QCStatus = bitor(self.Cell.QCStatus, self.CheckForPulsesMissingStimuli());
-            self.Cell.QCStatus = bitor(self.Cell.QCStatus, self.CheckForPulsesSpanMoreThanOneStimilus());
+            self.Cell.QCStatus = bitor(self.Cell.QCStatus, self.CheckForPulsesSpanMoreThanOneStimulus());
             
             % if at least one QC stage failed, exclude QC_OK from the QC result
             if (self.Cell.QCStatus ~= QCStatus.QC_OK) && (bitand(self.Cell.QCStatus, QCStatus.QC_OK) == QCStatus.QC_OK)
@@ -445,14 +445,14 @@ classdef CellAnalyser < handle
             end
         end
 
-        function res = CheckForPulsesSpanMoreThanOneStimilus(self)
+        function res = CheckForPulsesSpanMoreThanOneStimulus(self)
             res = QCStatus.QC_NotPerformed;
             
-            if (Parameters.QC.CheckForPulsesSpanMoreThanOneStimilus)
+            if (Parameters.QC.CheckForPulsesSpanMoreThanOneStimulus)
                 if (self.Cell.SNR2 >= Parameters.QC.SNR_Threshold)
                     res = QCStatus.QC_OK;
                 else
-                    res = QCStatus.QC_Failed_CheckForPulsesSpanMoreThanOneStimilus;
+                    res = QCStatus.QC_Failed_CheckForPulsesSpanMoreThanOneStimulus;
                 end
             end
         end

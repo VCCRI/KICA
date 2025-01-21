@@ -15,7 +15,7 @@ classdef QCStatus < uint32
         QC_OK (1)
         QC_Failed_CheckForSNR (2)
         QC_Failed_CheckForPulsesMissingStimuli (4)
-        QC_Failed_CheckForPulsesSpanMoreThanOneStimilus (8)
+        QC_Failed_CheckForPulsesSpanMoreThanOneStimulus (8)
         QC_Failed_CheckForNoPulsesDetected (16)
     end
     
@@ -43,8 +43,8 @@ classdef QCStatus < uint32
                 res = QCStatus.AddStatusToString(res, QCStatus.QC_Failed_CheckForPulsesMissingStimuli);
             end
             
-            if (bitand(qcStatus, QCStatus.QC_Failed_CheckForPulsesSpanMoreThanOneStimilus))
-                res = QCStatus.AddStatusToString(res, QCStatus.QC_Failed_CheckForPulsesSpanMoreThanOneStimilus);
+            if (bitand(qcStatus, QCStatus.QC_Failed_CheckForPulsesSpanMoreThanOneStimulus))
+                res = QCStatus.AddStatusToString(res, QCStatus.QC_Failed_CheckForPulsesSpanMoreThanOneStimulus);
             end
         end
     end

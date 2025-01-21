@@ -165,7 +165,7 @@ function analyse_csv_file(fileFullName)
   qc_checkForSNR = true;                      % <--- PARAMETER
   qc_checkForNoPulsesDetected = true;         % <--- PARAMETER
   qc_checkForPulsesMissingStimuli = false;    % <--- PARAMETER (TODO)
-  qc_checkForPulsesSpanMoreThanOneStimilus = false;% <--- PARAMETER (TODO)
+  qc_checkForPulsesSpanMoreThanOneStimulus = false;% <--- PARAMETER (TODO)
 
 
   %% initialize parameters
@@ -182,7 +182,7 @@ function analyse_csv_file(fileFullName)
 
   visualizationParameters = VisualizationParameters(visualize_showVisualizedCells, visualize_saveVisualizedCellsToFiles);
 
-  qcParameters = QCParameters(qc_isQC_Required, qc_SNR_Threshold, qc_writeFiguresToQCReportFile, qc_checkForSNR, qc_checkForNoPulsesDetected, qc_checkForPulsesMissingStimuli, qc_checkForPulsesSpanMoreThanOneStimilus);
+  qcParameters = QCParameters(qc_isQC_Required, qc_SNR_Threshold, qc_writeFiguresToQCReportFile, qc_checkForSNR, qc_checkForNoPulsesDetected, qc_checkForPulsesMissingStimuli, qc_checkForPulsesSpanMoreThanOneStimulus);
                                                 
   % initialize Global Parameters
   Parameters.Init(pulseDetectionParameters, pulseAnalysisParameters, visualizationParameters, qcParameters);
@@ -190,6 +190,7 @@ function analyse_csv_file(fileFullName)
                     
   %% run analysis
   wellAnalyser = WellAnalyser(tableData);
+
   wellAnalyser.StartAnalysis();
 
 
