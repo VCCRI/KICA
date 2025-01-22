@@ -21,9 +21,33 @@ classdef BaselineCorrector
             threshRatio = 6;        %             <-- PARAM
             extrema = 1;
 
-            maxIterationsNumber = 10; %             <-- PARAM
+            maxIterationsNumber = 15; %             <-- PARAM
             baselineFitThresholdPercentage = 8; %   <-- PARAM
-            scaleFactor = 0.75;
+            % WindowSize should generally be larger than StepSize:
+            % If WindowSize is much larger than StepSize, there will be more
+            % overlap between adjacent windows, leading to a smoother and more
+            % robust baseline estimation.
+            % If WindowSize is too small relative to StepSize, the algorithm
+            % may miss important trends in the baseline and produce a less
+            % accurate correction.
+
+            % StepSize controls resolution:
+            % Smaller StepSize values give a more detailed (fine-grained)
+            % baseline because the algorithm calculates the baseline at more
+            % points.
+            % Larger StepSize values result in a coarser baseline because
+            % fewer points are sampled.  
+
+            % WindowSize controls the trend smoothing:
+            % Smaller WindowSize values focus on local variations, which may
+            % better fit sharp changes in the baseline but risk overfitting
+            % noise.
+            % Larger WindowSize values fit broader trends, which can smooth
+            % out the baseline over a wide range but may fail to capture
+            % sudden baseline shifts.
+            stepSizeFactor = 0.4;
+            windowSizeFactor = 1.53;
+            %windowSizeFactor = 1.55; % for smoother fitting line
             
             iterationsCounter = 0;
             referenceBaselineDelta = 0;
@@ -40,7 +64,7 @@ classdef BaselineCorrector
                 if isnan(peakDistance)
                     peakDistance=200;
                 end
-                stepSize = peakDistance * scaleFactor;
+                stepSize = peakDistance * stepSizeFactor;
                 
                 estimNumWindows = length(tmpValues) / stepSize;
                 if estimNumWindows > maxNumWindows
@@ -50,7 +74,8 @@ classdef BaselineCorrector
                 
                 try
                     % calculate the baseline
-                    [tmpValues, tmpBaseline] = BaselineCorrector.CorrectBaseline_MsBackAdj(inLocations, tmpValues, regressionMethod, stepSize, 2*stepSize);
+                    windowSize = windowSizeFactor*stepSize;
+                    [tmpValues, tmpBaseline] = BaselineCorrector.CorrectBaseline_MsBackAdj(inLocations, tmpValues, regressionMethod, stepSize, windowSize);
                 catch ME
                     Log.ErrorMessage(3, strcat("Baseline correction error: ", " ID: ", ME.identifier, " Message: ", ME.message));
                     % log and swallow the exception
