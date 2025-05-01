@@ -45,6 +45,11 @@ classdef BaselineCorrector
             % Larger WindowSize values fit broader trends, which can smooth
             % out the baseline over a wide range but may fail to capture
             % sudden baseline shifts.
+
+            % Underfitting (baseline does not follow trends):
+            %   Decrease StepSize or WindowSize.
+            % Overfitting (baseline follows noise):
+            %   Increase StepSize or WindowSize
             stepSizeFactor = 0.4;
             windowSizeFactor = 1.53;
             %windowSizeFactor = 1.55; % for smoother fitting line
