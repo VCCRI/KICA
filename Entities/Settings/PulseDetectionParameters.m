@@ -10,6 +10,8 @@
 classdef PulseDetectionParameters < handle
     
     properties (SetAccess = private, GetAccess = public)
+        AnalysisStart_ms = -inf;
+        AnalysisEnd_ms = inf;
         % specify pulse detection params
         ThresholdPercentage = 5;             % <--- PARAMETER
         % part of signal at start to ignore
@@ -32,10 +34,12 @@ classdef PulseDetectionParameters < handle
     
     methods
         % constructor
-        function obj = PulseDetectionParameters(thresholdPercentage, numberOfSecondsAtStartToIgnore, signalType,...
-                                removeFalsePulses_PeakThresholdPercentage, removeFalsePulses_DurationThresholdPercentage,...
+        function obj = PulseDetectionParameters(analysisStart_ms, analysisEnd_ms, thresholdPercentage, numberOfSecondsAtStartToIgnore,...
+                                signalType, removeFalsePulses_PeakThresholdPercentage, removeFalsePulses_DurationThresholdPercentage,...
                                 denoise_waveletName, denoise_waveletNumber, denoise_waveletThresholdRule)
             if (nargin == 0)
+                obj.AnalysisStart_ms = -inf;
+                obj.AnalysisEnd_ms = inf;
                 obj.ThresholdPercentage = 5;
                 obj.NumberOfSecondsAtStartToIgnore = 1;
                 obj.NumberOfSamplesAtStartToIgnore = 1;
@@ -48,7 +52,9 @@ classdef PulseDetectionParameters < handle
                 obj.Denoise_WaveletName = "bior";
                 obj.Denoise_WaveletNumber = 6.8;
                 obj.Denoise_WaveletThresholdRule = "Hard";
-            elseif (nargin == 8)
+            elseif (nargin == 10)
+                obj.AnalysisStart_ms = analysisStart_ms;
+                obj.AnalysisEnd_ms = analysisEnd_ms;
                 obj.ThresholdPercentage = thresholdPercentage;
                 obj.NumberOfSecondsAtStartToIgnore = numberOfSecondsAtStartToIgnore;
                 obj.NumberOfSamplesAtStartToIgnore = ceil((numberOfSecondsAtStartToIgnore*1000)/Sampling.Period_ms);
