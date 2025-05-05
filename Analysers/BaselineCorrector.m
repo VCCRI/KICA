@@ -39,16 +39,26 @@ classdef BaselineCorrector
             % stepSize: Determines how often the baseline is estimated.
             % windowSize: Determines the local data range used for each estimation.
             % windowSize should generally be significantly larger than stepSize for smoothing.
-            defaultPeakDistanceFactor = 0.05; % Factor of signal length if peak finding fails (e.g., 1/20th)
+
+            % stepSizeFactor:
+            %   Controls the resolution of the baseline by determining how often the window is moved and the baseline calculation
+            %   is updated. A smaller value increases the resolution of the baseline, allowing it to change slope more rapidly.
+            % windowSizeFactor:
+            %   Controls the locality of the baseline. If the baseline is not smooth enough, increase the factor.
+            %   If the baseline seems too smooth and misses some curvature, decrease it.
+            % quantileValue:
+            %   Controls the vertical position of the baseline, lower value pulls baseline down, higher value pushes it up.
+
             stepSizeFactor = 0.25;   % Factor of peakDistance to determine stepSize
             windowSizeFactor = 4.5; % Factor of stepSize to determine windowSize (WindowSize = peakDistance * stepSizeFactor * windowSizeFactor)
+            quantileValue = 0.025;  % Lower quantile values are more conservative (less likely to include signal)
+
+            defaultPeakDistanceFactor = 0.05; % Factor of signal length if peak finding fails (e.g., 1/20th)
                                     % Example: windowSize = peakDistance * 0.5 * 4.0 = 2 * peakDistance
             minStepSize = 10;       % Minimum allowed step size
             minWindowSize = 30;     % Minimum allowed window size
             maxNumWindows = 1000;   % Maximum number of estimation windows (limits stepSize if too small)
 
-            % msbackadj specific parameters
-            quantileValue = 0.025;  % Lower quantile values are more conservative (less likely to include signal)
             smoothMethod = 'none';  % Smoothing within msbackadj (usually 'none' is fine)
             showPlotInternal = 0;   % Set to 1 for msbackadj's internal plot (debugging)
             % ------------------
