@@ -9,7 +9,7 @@ classdef BaselineCorrector
 % RELEASE VERSION: 0.8
 %
 % AUTHOR: Anton Shpak (a.shpak@victorchang.edu.au)
-% Adapted by Satya Arjunan (s.arjunan@victorchang.edu.au)
+%         Satya Arjunan (s.arjunan@victorchang.edu.au)
 %
 % DATE: May 2025 % Updated Date
 
@@ -67,7 +67,6 @@ classdef BaselineCorrector
             inValues = double(inValues(:));
             inLocations = double(inLocations(:));
 
-            % --- Log Input Info ---
             if iscell(regressionMethod) % Handle polynomial case for logging
                 regMethodStr = regressionMethod{1};
                 if numel(regressionMethod)>1
@@ -77,7 +76,6 @@ classdef BaselineCorrector
                 regMethodStr = regressionMethod;
             end
             Log.Message(3, sprintf('Baseline correction started. Signal length: %d. Method: %s.', length(inValues), regMethodStr));
-            % ----------------------
 
 
             % 1. Estimate characteristic peak distance for setting window/step sizes
@@ -202,10 +200,6 @@ classdef BaselineCorrector
              Log.Message(3, "Baseline correction: Completed.");
         end
     end
-
-    % No private methods needed currently
-    % methods (Access = private, Static = true)
-    % end
 
 end % End of classdef
 

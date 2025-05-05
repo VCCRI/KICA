@@ -7,7 +7,6 @@
 %
 % AUTHORS: Satya Arjunan (s.arjunan@victorchang.edu.au)
 %          Anton Shpak (a.shpak@victorchang.edu.au)
-%          AI Adaptation
 %
 % DATE: March 2024
 
@@ -107,8 +106,8 @@ function analyse_csv_file(fileFullName)
   % --- USER PARAMETERS START ---
 
   % 1. Define Time Window for Analysis
-  analysisStart_ms = 500; % [ms] <--- PARAMETER (Set to desired start time, e.g., 5000. Default: -inf for start of data)
-  analysisEnd_ms = inf;   % [ms] <--- PARAMETER (Set to desired end time, e.g., 15000. Default: +inf for end of data)
+  analysisStart_ms = -inf; % [ms] <--- PARAMETER (Set to desired start time, e.g., 5000. Default: -inf for start of data)
+  analysisEnd_ms = inf;   % [ms] <--- PARAMETER (Set to desired end time, e.g., 15000. Default: inf for end of data)
 
   % 2. SignalType:
   %pulseDetection_signalType = SignalType.Calcium; % <--- PARAMETER
@@ -223,4 +222,3 @@ function analyse_csv_file(fileFullName)
   %% end timer
   Log.EndBlock(fileStartTime, 1, strcat("Completed analysis of one file: processed ", num2str(length(wellAnalyser.Well.Cells)), " cells from file '", fileFullName, "'"));
 end
-% --- END OF FILE Start.m ---
